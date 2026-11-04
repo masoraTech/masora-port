@@ -1,0 +1,56 @@
+{
+  "node": {
+    "130df9fed788ecd3874f18d12f201a91aa249bb2": {
+      "workers": {
+        "app/admin/login/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!",
+        "app/admin/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/admin/login/page": "rsc",
+        "app/admin/page": "rsc"
+      }
+    },
+    "6c6f7b9622aa61167df688c445b496079980db79": {
+      "workers": {
+        "app/admin/login/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!",
+        "app/admin/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/admin/login/page": "rsc",
+        "app/admin/page": "rsc"
+      }
+    },
+    "78331a3833d17311770ecf3321d67afc66d3e23b": {
+      "workers": {
+        "app/admin/login/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!",
+        "app/admin/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/admin/login/page": "rsc",
+        "app/admin/page": "rsc"
+      }
+    },
+    "7b27a1a30d20771d51fab5fe7afb3b531943be59": {
+      "workers": {
+        "app/admin/login/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!",
+        "app/admin/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/admin/login/page": "rsc",
+        "app/admin/page": "rsc"
+      }
+    },
+    "bbd616c13a7fcf66608904f55945994a58900ba1": {
+      "workers": {
+        "app/admin/login/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!",
+        "app/admin/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CUsers%5C%5Cuser%5C%5CDownloads%5C%5Cportfolio-nextjs%5C%5Cportfolio%5C%5Capp%5C%5Cadmin%5C%5Cactions.ts%22%2C%5B%22deleteProject%22%2C%22logout%22%2C%22login%22%2C%22saveProject%22%2C%22toggleProject%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/admin/login/page": "rsc",
+        "app/admin/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "fIkhRVKPFN3KzhvGYon/wom+QUIs3fc9OHqnGRIK9XE="
+}
