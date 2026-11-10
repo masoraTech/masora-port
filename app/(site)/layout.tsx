@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import TimedSplash from "@/components/TimedSplash";
+import MotionLayer from "@/components/MotionLayer";
 import { db } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -10,6 +11,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <>
       <TimedSplash />
+      <MotionLayer />
       <Navbar categories={categories.map((c) => ({ name: c.name, slug: c.slug }))} />
       {children}
       <footer className="site-footer">

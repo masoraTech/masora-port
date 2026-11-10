@@ -120,7 +120,7 @@ export default function Navbar({ categories }: { categories: Category[] }) {
       <header className={`top${scrolled ? " is-scrolled" : ""}`} id="top">
         <Link href="/" className="brand" aria-label="Masora Technologies, accueil">
           <span className="brand-icon"><img src="/masora_technologies_icon.png" alt="" /></span>
-          <img src="/masora_technologies_logo.png" alt="Masora Technologies" className="brand-img" />
+          <img src="/masora-logo-blanc.png" alt="Masora Technologies" className="brand-img" />
         </Link>
 
         <nav className="top-controls" aria-label="Navigation principale">

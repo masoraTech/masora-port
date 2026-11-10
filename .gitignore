@@ -2,3 +2,8 @@
 /node_modules
 /.next
 /out
+.neon
+.env*
+!.env.example
+/.next-dev
+/.next-preview

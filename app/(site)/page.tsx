@@ -3,23 +3,25 @@ import Carousel from "@/components/Carousel";
 import HomeCircuitHero from "@/components/HomeCircuitHero";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import { db } from "@/lib/db";
+import { projectSlidesQuery, realtime } from "@/lib/realtime";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home({ searchParams }: { searchParams: { cat?: string } }) {
   const cat = searchParams.cat;
-  const [projects, categories, technologyRecords] = await Promise.all([
+  const [projects, categories, technologyRecords, sealedQuery] = await Promise.all([
     db.project.findMany({
       where: { active: true, ...(cat ? { category: { slug: cat } } : {}) },
       include: {
         images: { orderBy: { position: "asc" }, ...(!cat ? { take: 1 } : {}) },
         category: true,
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       ...(!cat ? { take: 5 } : {}),
     }),
     db.category.findMany({ orderBy: { id: "asc" } }),
     db.project.findMany({ where: { active: true }, select: { technologies: true } }),
+    realtime ? realtime.seal({ query: projectSlidesQuery() }) : Promise.resolve(null),
   ]);
   const technologies = [...new Set(
     technologyRecords
@@ -132,7 +134,8 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
             category: project.category.name,
             imageUrl: project.images[0]?.url ?? null,
           }))}
-          />
+          sealedQuery={sealedQuery}
+        />
       )}
     </main>
   );
