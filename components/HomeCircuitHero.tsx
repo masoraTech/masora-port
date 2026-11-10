@@ -183,7 +183,7 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
           <p>Une équipe IT qui transforme vos idées en produits numériques fiables : du web au mobile, jusqu’à l’ERP.</p>
 
           <div className="circuit-actions">
-            <Link href="#projects" className="circuit-button circuit-button-primary">
+            <Link href="#services" className="circuit-button circuit-button-primary">
               <span>Voir nos réalisations</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
             </Link>

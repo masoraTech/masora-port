@@ -26,7 +26,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           <nav className="footer-column" aria-label="Navigation de pied de page">
             <h2>Navigation</h2>
             <Link href="/">Accueil</Link>
-            <Link href="/#projects">Réalisations</Link>
+            <Link href="/#services">Réalisations</Link>
             <Link href="/contact">Contact</Link>
           </nav>
           <nav className="footer-column footer-expertise" aria-label="Nos expertises">

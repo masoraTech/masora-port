@@ -1,9 +1,7 @@
 import Link from "next/link";
 import Carousel from "@/components/Carousel";
 import HomeCircuitHero from "@/components/HomeCircuitHero";
-import ProjectCarousel from "@/components/ProjectCarousel";
 import { getCategories, getProjects, getTechnologies } from "@/lib/queries";
-import { projectSlidesQuery, realtime } from "@/lib/realtime";
 import { SERVICE_ICON_PATHS, serviceInfo } from "@/lib/services";
 
 export const dynamic = "force-dynamic";
@@ -17,11 +15,10 @@ const PROCESS = [
 
 export default async function Home({ searchParams }: { searchParams: { cat?: string } }) {
   const cat = searchParams.cat;
-  const [projects, categories, technologies, sealedQuery] = await Promise.all([
-    getProjects(cat ?? null),
+  const [projects, categories, technologies] = await Promise.all([
+    cat ? getProjects(cat) : Promise.resolve([]),
     getCategories(),
     getTechnologies(),
-    realtime && !cat ? realtime.seal({ query: projectSlidesQuery() }) : Promise.resolve(null),
   ]);
   const currentCategory = cat ? categories.find((category) => category.slug === cat) : null;
   const current = cat ? currentCategory?.name ?? cat : null;
@@ -43,7 +40,7 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
             </div>
           </div>
           <nav className="category-tabs" aria-label="Explorer les catégories">
-            <Link href="/#projects" className="category-tab">Toutes les réalisations</Link>
+            <Link href="/#services" className="category-tab">Toutes les expertises</Link>
             {categories.map((category) => (
               <Link
                 key={category.slug}
@@ -147,26 +144,9 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
         </section>
       )}
 
-      <section className="projects-intro" id="projects">
-        <div>
-          <span className="section-eyebrow">02 · PORTFOLIO</span>
-          <h2>Des projets concrets. Des solutions durables.</h2>
-        </div>
-        <p>Une sélection de réalisations récentes, imaginées avec nos clients et développées pour répondre à leurs besoins.</p>
-      </section>
-      <ProjectCarousel
-        projects={projects.map((project) => ({
-          id: project.id,
-          title: project.title,
-          category: project.category,
-          imageUrl: project.images[0] ?? null,
-        }))}
-        sealedQuery={sealedQuery}
-      />
-
       <section className="process" aria-labelledby="process-title">
         <div className="section-head">
-          <span className="section-eyebrow">03 · NOTRE MÉTHODE</span>
+          <span className="section-eyebrow">02 · NOTRE MÉTHODE</span>
           <h2 id="process-title">Un processus clair, de l’idée au lancement.</h2>
         </div>
         <ol className="process-steps">

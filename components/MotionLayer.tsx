@@ -11,8 +11,6 @@ const REVEAL_SELECTOR = [
   ".process-step",
   ".cta-band",
   ".technology-marquee",
-  ".projects-intro > *",
-  ".project-carousel",
   ".category-heading > *",
   ".category-tabs",
   ".card",

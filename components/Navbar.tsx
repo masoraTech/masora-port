@@ -106,8 +106,8 @@ export default function Navbar({ categories }: { categories: Category[] }) {
     };
   }, [open]);
 
-  const homeActive = pathname === "/" && !selectedCategory && activeHash !== "#projects";
-  const projectsActive = (pathname === "/" && activeHash === "#projects") || pathname === "/projects" || pathname.startsWith("/projects/");
+  const homeActive = pathname === "/" && !selectedCategory && activeHash !== "#services";
+  const projectsActive = (pathname === "/" && activeHash === "#services") || pathname === "/projects" || pathname.startsWith("/projects/");
   const contactActive = pathname === "/contact";
   const categoryActive = pathname === "/" && Boolean(selectedCategory);
   const selectCategory = (slug: string) => {
@@ -181,10 +181,10 @@ export default function Navbar({ categories }: { categories: Category[] }) {
             <NavigationIcon name="home" />Accueil
           </Link>
           <Link
-            href="/#projects"
+            href="/#services"
             onClick={() => {
               setSelectedCategory(null);
-              setActiveHash("#projects");
+              setActiveHash("#services");
               closeMenu();
             }}
             className={projectsActive ? "is-active" : undefined}
