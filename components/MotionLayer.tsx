@@ -6,8 +6,10 @@ import { useEffect } from "react";
 // Elements that fade/slide in when they scroll into view.
 const REVEAL_SELECTOR = [
   "[data-reveal]",
-  ".home-expertise",
-  ".expertise-link",
+  ".section-head > *",
+  ".service-card",
+  ".process-step",
+  ".cta-band",
   ".technology-marquee",
   ".projects-intro > *",
   ".project-carousel",
@@ -24,7 +26,7 @@ const REVEAL_SELECTOR = [
 ].join(",");
 
 // Elements that tilt in 3D under the pointer.
-const TILT_SELECTOR = ".card, .featured-project, .admin-stat";
+const TILT_SELECTOR = ".card, .featured-project, .service-card, .admin-stat";
 // Elements pulled slightly towards the pointer.
 const MAGNET_SELECTOR = ".circuit-button, .featured-link, .featured-arrow, .back-top, .btn";
 

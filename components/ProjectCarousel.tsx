@@ -130,6 +130,11 @@ function ProjectCarouselContent({
             <div className="featured-image featured-placeholder" aria-hidden="true" />
           )}
           <div className="featured-shade" />
+          <div className="featured-chrome" aria-hidden="true">
+            <span className="win-dots"><i /><i /><i /></span>
+            <span className="browser-url">masora / projets / {project.id}</span>
+            <span className="featured-live"><i />Live</span>
+          </div>
           <div className="featured-content">
             <div className="featured-meta">
               <span className="featured-category">{project.category}</span>

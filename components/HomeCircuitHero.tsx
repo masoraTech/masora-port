@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import CountUp from "@/components/CountUp";
+import HeroTerminal from "@/components/HeroTerminal";
 
 const COLORS = ["233, 30, 122", "47, 140, 255", "46, 224, 122"];
-const ROTATING_WORDS = ["plus loin.", "plus vite.", "plus haut.", "ensemble."];
-const HEADLINE = ["Le", "numérique,", "pensé", "pour", "aller"];
+const ROTATING_WORDS = ["sites web.", "applications.", "ERP.", "boutiques en ligne."];
+const HEADLINE = ["Nous", "concevons", "et", "développons", "vos"];
 
 type Particle = { x: number; y: number; vx: number; vy: number; r: number; c: string };
 
-export default function HomeCircuitHero() {
+type HeroStats = { projects: number; expertises: number; technologies: number };
+
+export default function HomeCircuitHero({ stats, technologies }: { stats: HeroStats; technologies: string[] }) {
   const heroRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [wordIndex, setWordIndex] = useState(0);
@@ -163,40 +167,50 @@ export default function HomeCircuitHero() {
         <span /><span /><span />
       </div>
 
-      <div className="circuit-content">
-        <span className="hero-badge">
-          <i aria-hidden="true" />
-          Masora Technologies · Studio numérique
-        </span>
-
-        <h1 id="circuit-title">
-          <span className="sr-only">Le numérique, pensé pour aller plus loin.</span>
-          <span className="hero-words" aria-hidden="true">
-            {HEADLINE.map((word, index) => (
-              <span className="hero-word" key={word} style={{ "--i": index } as React.CSSProperties}>
-                {word}
-              </span>
-            ))}
-            <span className="hero-rotator" style={{ "--i": HEADLINE.length } as React.CSSProperties}>
-              <span className="hero-rotator-word" key={wordIndex}>{ROTATING_WORDS[wordIndex]}</span>
-            </span>
+      <div className="hero-layout">
+        <div className="circuit-content">
+          <span className="hero-badge">
+            <i aria-hidden="true" />
+            Masora Technologies · Entreprise de services numériques
           </span>
-        </h1>
 
-        <p>Des solutions digitales conçues pour faire avancer vos idées — du web au mobile, jusqu’à l’ERP.</p>
+          <h1 id="circuit-title">
+            <span className="sr-only">Nous concevons et développons vos sites web, applications, ERP et boutiques en ligne.</span>
+            <span className="hero-words" aria-hidden="true">
+              {HEADLINE.map((word, index) => (
+                <span className="hero-word" key={word} style={{ "--i": index } as React.CSSProperties}>
+                  {word}
+                </span>
+              ))}
+              <span className="hero-rotator" style={{ "--i": HEADLINE.length } as React.CSSProperties}>
+                <span className="hero-rotator-word" key={wordIndex}>{ROTATING_WORDS[wordIndex]}</span>
+              </span>
+            </span>
+          </h1>
 
-        <div className="circuit-actions">
-          <Link href="#services" className="circuit-button circuit-button-primary">
-            <span>Découvrir nos services</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
-          </Link>
-          <Link href="/contact" className="circuit-button circuit-button-secondary">
-            <span>Nous contacter</span>
-          </Link>
+          <p>Une équipe IT qui transforme vos idées en produits numériques fiables : du web au mobile, jusqu’à l’ERP.</p>
+
+          <div className="circuit-actions">
+            <Link href="#projects" className="circuit-button circuit-button-primary">
+              <span>Voir nos réalisations</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </Link>
+            <Link href="/contact" className="circuit-button circuit-button-secondary">
+              <span>Démarrer un projet</span>
+            </Link>
+          </div>
+
+          <dl className="hero-stats">
+            <div><dt>Projets livrés</dt><dd><CountUp value={stats.projects} /></dd></div>
+            <div><dt>Expertises</dt><dd><CountUp value={stats.expertises} /></dd></div>
+            <div><dt>Technologies</dt><dd><CountUp value={stats.technologies} /></dd></div>
+          </dl>
         </div>
+
+        <HeroTerminal technologies={technologies} />
       </div>
 
-      <a className="hero-scroll" href="#services" aria-label="Défiler vers nos expertises">
+      <a className="hero-scroll" href="#services" aria-label="Défiler vers nos services">
         <span />
       </a>
     </section>

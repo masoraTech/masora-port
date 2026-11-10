@@ -28,7 +28,13 @@ export default async function ProjectPage({ params }: { params: { id: string } }
         </div>
       </header>
       <section className="project-showcase" aria-label={`Galerie du projet ${p.title}`}>
-        <Carousel presentation images={p.images.map((image) => image.url)} title={p.title} />
+        <div className="browser-frame browser-frame-lg">
+          <div className="browser-bar" aria-hidden="true">
+            <span className="win-dots"><i /><i /><i /></span>
+            <span className="browser-url">masora / projets / {p.id}</span>
+          </div>
+          <Carousel presentation images={p.images.map((image) => image.url)} title={p.title} />
+        </div>
         {p.images.length > 1 && <span className="showcase-caption">{String(p.images.length).padStart(2, "0")} VISUELS · {p.category.name.toUpperCase()}</span>}
       </section>
       <section className="project-details">
