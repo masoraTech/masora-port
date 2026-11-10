@@ -20,4 +20,4 @@ Les fichiers générés en développement sont isolés dans `.next-dev`, sépar�
 
 Le seed crée cinq catégories et le compte admin configuré dans `.env`, mais aucun projet ni message de contact. Le mot de passe est stocké sous forme hachée.
 
-Les images téléversées sont enregistrées localement dans `uploads` (ou dans le dossier défini par `UPLOAD_DIR`). La base contient les projets, les catégories et les messages de contact ; sauvegarder également `uploads` pour conserver les images.
+Les images téléversées sont stockées dans Netlify Blobs (store `uploads`). En local, lancer le site avec `netlify dev` pour bénéficier de l’émulation de Blobs. La base contient les projets, les catégories et les messages de contact.
