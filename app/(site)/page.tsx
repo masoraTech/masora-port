@@ -2,7 +2,7 @@ import Link from "next/link";
 import Carousel from "@/components/Carousel";
 import HomeCircuitHero from "@/components/HomeCircuitHero";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { db } from "@/lib/db";
+import { getCategories, getProjects, getTechnologies } from "@/lib/queries";
 import { projectSlidesQuery, realtime } from "@/lib/realtime";
 import { SERVICE_ICON_PATHS, serviceInfo } from "@/lib/services";
 
@@ -17,29 +17,12 @@ const PROCESS = [
 
 export default async function Home({ searchParams }: { searchParams: { cat?: string } }) {
   const cat = searchParams.cat;
-  const [projects, categories, technologyRecords, sealedQuery] = await Promise.all([
-    db.project.findMany({
-      where: { active: true, ...(cat ? { category: { slug: cat } } : {}) },
-      include: {
-        images: { orderBy: { position: "asc" }, ...(!cat ? { take: 1 } : {}) },
-        category: true,
-      },
-      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
-      ...(!cat ? { take: 5 } : {}),
-    }),
-    db.category.findMany({
-      orderBy: { id: "asc" },
-      include: { _count: { select: { projects: { where: { active: true } } } } },
-    }),
-    db.project.findMany({ where: { active: true }, select: { technologies: true } }),
-    realtime ? realtime.seal({ query: projectSlidesQuery() }) : Promise.resolve(null),
+  const [projects, categories, technologies, sealedQuery] = await Promise.all([
+    getProjects(cat ?? null),
+    getCategories(),
+    getTechnologies(),
+    realtime && !cat ? realtime.seal({ query: projectSlidesQuery() }) : Promise.resolve(null),
   ]);
-  const technologies = [...new Set(
-    technologyRecords
-      .flatMap((project) => project.technologies.split(","))
-      .map((technology) => technology.trim())
-      .filter(Boolean),
-  )];
   const currentCategory = cat ? categories.find((category) => category.slug === cat) : null;
   const current = cat ? currentCategory?.name ?? cat : null;
 
@@ -82,12 +65,12 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
                   <span className="win-dots"><i /><i /><i /></span>
                   <span className="browser-url">masora / projets / {p.id}</span>
                 </div>
-                <Carousel images={p.images.map((x) => x.url)} title={p.title} />
+                <Carousel images={p.images} title={p.title} />
               </div>
               <div className="info">
                 <div className="project-meta">
-                  <span className="tag">{p.category.name}</span>
-                  <span className="project-number">{p.createdAt.getFullYear()}</span>
+                  <span className="tag">{p.category}</span>
+                  <span className="project-number">{p.year}</span>
                 </div>
                 <h3><Link href={`/projects/${p.id}`}>{p.title}</Link></h3>
                 {p.technologies && (
@@ -107,7 +90,7 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
     );
   }
 
-  const totalProjects = categories.reduce((sum, category) => sum + category._count.projects, 0);
+  const totalProjects = categories.reduce((sum, category) => sum + category.projectCount, 0);
 
   return (
     <main className="home-page">
@@ -135,8 +118,8 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
                 <p>{info.description}</p>
                 <span className="service-footer">
                   <span>
-                    {category._count.projects > 0
-                      ? `${category._count.projects} ${category._count.projects === 1 ? "projet" : "projets"}`
+                    {category.projectCount > 0
+                      ? `${category.projectCount} ${category.projectCount === 1 ? "projet" : "projets"}`
                       : "Découvrir"}
                   </span>
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9" /></svg>
@@ -175,8 +158,8 @@ export default async function Home({ searchParams }: { searchParams: { cat?: str
         projects={projects.map((project) => ({
           id: project.id,
           title: project.title,
-          category: project.category.name,
-          imageUrl: project.images[0]?.url ?? null,
+          category: project.category,
+          imageUrl: project.images[0] ?? null,
         }))}
         sealedQuery={sealedQuery}
       />

@@ -39,7 +39,7 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
 
     const resize = () => {
       const box = hero.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
       width = box.width;
       height = box.height;
       canvas.width = Math.round(width * ratio);
@@ -47,7 +47,7 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      const count = Math.max(28, Math.min(90, Math.round((width * height) / 16000)));
+      const count = Math.max(24, Math.min(55, Math.round((width * height) / 22000)));
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -107,13 +107,10 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
       }
       for (const p of particles) {
         ctx.fillStyle = `rgba(${p.c}, 0.9)`;
-        ctx.shadowColor = `rgba(${p.c}, 1)`;
-        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
-      ctx.shadowBlur = 0;
     };
 
     const loop = () => {
@@ -132,8 +129,6 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
       const box = hero.getBoundingClientRect();
       pointer.x = event.clientX - box.left;
       pointer.y = event.clientY - box.top;
-      hero.style.setProperty("--hx", `${(pointer.x / box.width - 0.5).toFixed(3)}`);
-      hero.style.setProperty("--hy", `${(pointer.y / box.height - 0.5).toFixed(3)}`);
     };
     const onLeave = () => {
       pointer.x = -9999;
@@ -163,9 +158,6 @@ export default function HomeCircuitHero({ stats, technologies }: { stats: HeroSt
   return (
     <section ref={heroRef} className="circuit-hero" aria-labelledby="circuit-title">
       <canvas ref={canvasRef} className="circuit-canvas" aria-hidden="true" />
-      <div className="hero-rings" aria-hidden="true">
-        <span /><span /><span />
-      </div>
 
       <div className="hero-layout">
         <div className="circuit-content">

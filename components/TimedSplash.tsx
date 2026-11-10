@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const DISPLAY_TIME = 4000;
-const FADE_TIME = 300;
+const DISPLAY_TIME = 1300;
+const FADE_TIME = 350;
 const SESSION_KEY = "mms-home-splash-shown";
 
 export default function TimedSplash() {

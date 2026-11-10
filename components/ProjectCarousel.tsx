@@ -70,8 +70,11 @@ function ProjectCarouselContent({
   const [activeIndex, setActiveIndex] = useState(0);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+  // Once a visitor touches or clicks the carousel, stop autoplay so slides never
+  // change under their finger.
+  const [interacted, setInteracted] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const paused = hovered || focused;
+  const paused = hovered || focused || interacted;
   const total = projects.length;
   const project = projects[activeIndex];
 
@@ -115,6 +118,7 @@ function ProjectCarouselContent({
         style={{ "--autoplay": `${AUTOPLAY_DELAY}ms` } as React.CSSProperties}
         aria-label="Projets récents"
         aria-roledescription="carrousel"
+        onPointerDown={() => setInteracted(true)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setFocused(true)}
@@ -123,11 +127,13 @@ function ProjectCarouselContent({
           if (!(nextFocused instanceof Node) || !event.currentTarget.contains(nextFocused)) setFocused(false);
         }}
       >
-        <article className="featured-project" key={project.id} aria-live="polite">
+        {/* The article and its link stay mounted between slides so a click is never
+            lost mid-change; only the image and text are re-keyed to replay their animation. */}
+        <article className="featured-project" aria-live="polite">
           {project.imageUrl ? (
-            <img className="featured-image" src={project.imageUrl} alt="" />
+            <img key={project.id} className="featured-image" src={project.imageUrl} alt="" loading="lazy" decoding="async" />
           ) : (
-            <div className="featured-image featured-placeholder" aria-hidden="true" />
+            <div key={project.id} className="featured-image featured-placeholder" aria-hidden="true" />
           )}
           <div className="featured-shade" />
           <div className="featured-chrome" aria-hidden="true">
@@ -136,11 +142,13 @@ function ProjectCarouselContent({
             <span className="featured-live"><i />Live</span>
           </div>
           <div className="featured-content">
-            <div className="featured-meta">
-              <span className="featured-category">{project.category}</span>
-              <span className="featured-count">{String(activeIndex + 1).padStart(2, "0")} <i>/</i> {String(total).padStart(2, "0")}</span>
+            <div className="featured-text" key={project.id}>
+              <div className="featured-meta">
+                <span className="featured-category">{project.category}</span>
+                <span className="featured-count">{String(activeIndex + 1).padStart(2, "0")} <i>/</i> {String(total).padStart(2, "0")}</span>
+              </div>
+              <h2>{project.title}</h2>
             </div>
-            <h2>{project.title}</h2>
             <Link className="featured-link" href={`/projects/${project.id}`}>
               Découvrir le projet
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>

@@ -38,7 +38,7 @@ export default function Carousel({ images, title, mini, presentation }: { images
   return (
     <>
       <div className={`car${mini ? " mini" : ""}${presentation ? " presentation" : ""}`}>
-        {n ? <img src={images[i]} alt={`${title} – image ${i + 1}`} /> : <div className="ph">{title}</div>}
+        {n ? <img src={images[i]} alt={`${title} – image ${i + 1}`} loading={presentation ? "eager" : "lazy"} decoding="async" /> : <div className="ph">{title}</div>}
         {n > 1 && (
           <>
             <button type="button" className="arr l" onClick={() => go(-1)} aria-label="Image précédente">
@@ -102,7 +102,7 @@ export default function Carousel({ images, title, mini, presentation }: { images
                   aria-label={`Afficher l’image ${index + 1}`}
                   aria-current={index === i ? "true" : undefined}
                 >
-                  <img src={image} alt="" />
+                  <img src={image} alt="" loading="lazy" decoding="async" />
                 </button>
               ))}
             </div>

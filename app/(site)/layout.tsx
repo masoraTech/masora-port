@@ -2,12 +2,12 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import TimedSplash from "@/components/TimedSplash";
 import MotionLayer from "@/components/MotionLayer";
-import { db } from "@/lib/db";
+import { getCategories } from "@/lib/queries";
 
 export const dynamic = "force-dynamic";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const categories = await db.category.findMany({ orderBy: { id: "asc" } });
+  const categories = await getCategories();
   return (
     <>
       <TimedSplash />

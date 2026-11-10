@@ -1,7 +1,8 @@
 "use server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { PORTFOLIO_TAG } from "@/lib/queries";
 import { db } from "@/lib/db";
 import { COOKIE, SESSION_MAX_AGE, sessionToken, requireAdmin } from "@/lib/auth";
 import { verifyPassword } from "@/lib/password";
@@ -56,7 +57,8 @@ export async function saveProject(fd: FormData) {
       data: { ...data, images: { create: urls.map((url, k) => ({ url, position: k })) } },
     });
   }
-  revalidatePath("/");
+  revalidateTag(PORTFOLIO_TAG);
+  revalidatePath("/", "layout");
   revalidatePath("/admin");
   redirect("/admin");
 }
@@ -66,7 +68,8 @@ export async function toggleProject(fd: FormData) {
   const id = Number(fd.get("id"));
   const p = await db.project.findUnique({ where: { id } });
   if (p) await db.project.update({ where: { id }, data: { active: !p.active } });
-  revalidatePath("/");
+  revalidateTag(PORTFOLIO_TAG);
+  revalidatePath("/", "layout");
   revalidatePath("/admin");
 }
 
@@ -77,6 +80,7 @@ export async function deleteProject(fd: FormData) {
   if (!p) return;
   await db.project.delete({ where: { id } });
   await Promise.all(p.images.map((i) => removeFile(i.url)));
-  revalidatePath("/");
+  revalidateTag(PORTFOLIO_TAG);
+  revalidatePath("/", "layout");
   revalidatePath("/admin");
 }
